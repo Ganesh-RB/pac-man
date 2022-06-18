@@ -1,0 +1,34 @@
+:root {
+  --width: 90vmin;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+body {
+  background-color: grey;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameBoard {
+  background-color: black;
+  min-width: 75%;
+  max-width: 90%;
+  width: var(--width);
+  max-height: 90%;
+  aspect-ratio: 3;
+  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: repeat(60,1fr);
+  grid-template-rows: repeat(20,1fr);
+}
+
+
