@@ -7,9 +7,9 @@ const RIGHT = {
 };
 
 const UP = {
-  x: 0, y: 1, transform: "scale(1,1) rotate(-90deg)"
+  x: 0, y: -1, transform: "scale(1,1) rotate(-90deg)"
 };
 
 const DOWN = {
-  x: 0, y: -1, transform: "scale(1,1) rotate(90deg)"
+  x: 0, y: 1, transform: "scale(-1,1) rotate(90deg)"
 };
