@@ -1,5 +1,5 @@
 :root {
-  --width: 90vmin;
+  --width: max(90vmin, 75%);
 }
 
 html {
@@ -31,4 +31,6 @@ body {
   grid-template-rows: repeat(20,1fr);
 }
 
-
+#pacman{
+  width: 100%;
+}
