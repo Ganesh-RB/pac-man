@@ -32,7 +32,7 @@ const drawPacman = (gameBoard) => {
   pacman.id = "pacman";
   direction = getInputDirection();
   pacman.style.transform = direction.transform;
-  pacman.style.gridRowStart = position.y;
+  pacman.style.gridRowStart = position.y; 
   pacman.style.gridColumnStart = position.x;
   gameBoard.appendChild(pacman);
 }

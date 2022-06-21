@@ -17,6 +17,23 @@ const updateInputDirection = (event) => {
 
 window.addEventListener("keydown", updateInputDirection);
 
+document.addEventListener("swipe-left", e => {
+  inputDirection = LEFT;
+});
+
+document.addEventListener("swipe-right", e => {
+  console.log("right");
+  inputDirection = RIGHT;
+});
+
+document.addEventListener("swipe-down", e => {
+  inputDirection = DOWN;
+});
+
+document.addEventListener("swipe-up", e => {
+  inputDirection = UP;
+});
+
 const getInputDirection = () => {
   return inputDirection;
 }
