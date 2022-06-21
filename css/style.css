@@ -19,14 +19,20 @@ body {
   align-items: center;
 }
 
-#gameBoard {
-  background-color: black;
+#canvas {
+  background-color: #303030b3;
   min-width: 75%;
   max-width: 90%;
   width: var(--width);
   max-height: 90%;
   aspect-ratio: 3;
-  padding: 20px 10px;
+  padding: 30px 30px;
+  position: relative;
+  border-radius: 5px;
+}
+
+#gameBoard {
+  background-color: black;
   display: grid;
   grid-template-columns: repeat(60, 1fr);
   grid-template-rows: repeat(20, 1fr);
@@ -34,4 +40,24 @@ body {
 
 #pacman {
   width: 100%;
+}
+
+#fullscreenToggler {
+  background-color: #303030b3;
+  background-image: url("../image/fullscreen.svg");
+  background-size: cover;
+  margin: 2.5px;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+#scoreBoard{
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  line-height: 20px;
+
 }

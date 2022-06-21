@@ -16,3 +16,8 @@ const draw = () => {
   gameBoard.innerHTML = "";
   drawPacman(gameBoard);
 }
+
+const fullscreenTogglerButton = document.getElementById("fullscreenToggler");
+fullscreenTogglerButton.addEventListener("click", toggleFullscreen);  
+
+const scoreBoard = document.getElementById("scoreBoard");

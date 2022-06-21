@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/pacmanUtils.js"></script>
   <script src="js/eventsUtils.js"></script>
+  <script src="js/gameUtils.js"></script>
   <script src="js/input.js"></script>
   <script src="js/pacman.js"></script>
   <script src="js/game.js" defer></script>
@@ -15,7 +15,10 @@
 </head>
 
 <body>
-  <div id="gameBoard">
+  <div id="canvas">
+    <div id="scoreBoard"></div>
+    <div id="gameBoard"> </div>
+    <button id="fullscreenToggler"> </button>
   </div>
 </body>
 
