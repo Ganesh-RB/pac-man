@@ -1,5 +1,6 @@
 :root {
-  --width: max(90vmin, 75%);
+  --width: 80vw;
+  --height: 75vh;
 }
 
 html {
@@ -21,21 +22,16 @@ body {
 
 #canvas {
   background-color: #303030b3;
-  min-width: 75%;
-  max-width: 90%;
-  width: var(--width);
-  max-height: 90%;
-  aspect-ratio: 3;
-  padding: 30px 30px;
+  padding: 3vmin 3vmin;
   position: relative;
   border-radius: 5px;
 }
 
 #gameBoard {
+  max-width: var(--width);
   background-color: black;
+  max-height: var(--height);
   display: grid;
-  grid-template-columns: repeat(60, 1fr);
-  grid-template-rows: repeat(20, 1fr);
 }
 
 #pacman {
@@ -46,12 +42,17 @@ body {
   background-color: #303030b3;
   background-image: url("../image/fullscreen.svg");
   background-size: cover;
-  margin: 2.5px;
-  width: 25px;
-  height: 25px;
+  margin: 0.4vmin;
+  width: 2.8vmin;
+  height: 2.8vmin;
   position: absolute;
   right: 0px;
   bottom: 0px;
+}
+
+button{
+  border-width: 0.2vmin;
+  padding: 0.2vmin 0.6vmin;
 }
 
 #scoreBoard{
@@ -59,5 +60,4 @@ body {
   top: 5px;
   left: 30px;
   line-height: 20px;
-
 }

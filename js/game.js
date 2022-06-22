@@ -1,6 +1,8 @@
 var gameBoard = document.getElementById("gameBoard");
 const SPEED = 4; // 4 unit per sec
 
+gameInit(gameBoard);
+
 const main = () => {
   update();
   draw();

@@ -2,18 +2,18 @@ var direction = LEFT;
 var position = { x: 10, y: 11 };
 
 const positionOverflowHandler = () => {
-  if (position.x > 60) {
+  if (position.x > getGridColumns()) {
     position.x = 0;
   }
   else if (position.x < 0) {
-    position.x = 60;
+    position.x = getGridColumns();
   }
 
-  if (position.y > 20) {
+  if (position.y > getGridRows()) {
     position.y = 0;
   }
   else if (position.y < 0) {
-    position.y = 20;
+    position.y = getGridRows();
   }
 }
 
@@ -32,7 +32,7 @@ const drawPacman = (gameBoard) => {
   pacman.id = "pacman";
   direction = getInputDirection();
   pacman.style.transform = direction.transform;
-  pacman.style.gridRowStart = position.y; 
+  pacman.style.gridRowStart = position.y;
   pacman.style.gridColumnStart = position.x;
   gameBoard.appendChild(pacman);
 }

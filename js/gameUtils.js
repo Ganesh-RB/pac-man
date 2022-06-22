@@ -1,3 +1,24 @@
+/*************** Game setup ***************/
+const gridColumns = 60;
+const gridRows = 20;
+
+
+const gameInit = (gameBoard) => {
+  gameBoard.style.gridTemplateColumns = `repeat(${gridColumns},1fr)`;
+  gameBoard.style.gridTemplateRows = `repeat(${gridRows},1fr)`;
+  gameBoard.style.aspectRatio = `${gridColumns / gridRows}`;
+}
+
+const getGridRows = () => {
+  return gridRows;
+}
+
+const getGridColumns = () => {
+  return gridColumns;
+}
+
+
+/************ Full screen Toggler ***********/
 const isFullscreen = () => {
   return document.fullscreenElement;
 }
@@ -14,7 +35,7 @@ const toggleFullscreen = (e) => {
 }
 
 
-
+/************* Direction Utilities *****************/
 const LEFT = {
   x: -1, y: 0, transform: "scale(-1,1) rotate(0deg)"
 };
@@ -32,7 +53,7 @@ const DOWN = {
 };
 
 
-/* Score Board */
+/****************** Score Board ******************/
 var score = 0;
 
 const updateScore = () => {
