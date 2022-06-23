@@ -26,11 +26,11 @@ const isFullscreen = () => {
 const toggleFullscreen = (e) => {
   if (isFullscreen()) {
     document.exitFullscreen();
-    fullscreenTogglerButton.style.backgroundImage = "url(../image/fullscreen.svg)"
+    fullscreenTogglerButton.style.backgroundImage = "url(image/fullscreen.svg)"
 
   } else {
     document.documentElement.requestFullscreen();
-    fullscreenTogglerButton.style.backgroundImage = "url(../image/fullscreen-exit.svg)"
+    fullscreenTogglerButton.style.backgroundImage = "url(image/fullscreen-exit.svg)"
   }
 }
 
