@@ -32,6 +32,8 @@ body {
   background-color: black;
   max-height: var(--height);
   display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 #pacman {
@@ -50,14 +52,43 @@ body {
   bottom: 0px;
 }
 
-button{
+button {
   border-width: 0.2vmin;
   padding: 0.2vmin 0.6vmin;
 }
 
-#scoreBoard{
+#scoreBoard {
   position: absolute;
   top: 5px;
   left: 30px;
   line-height: 20px;
+}
+
+.food-element {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.power-pellet {
+  animation: grow-power-pellet infinite 2s alternate;
+}
+
+@keyframes grow-power-pellet {
+  50% {
+    width: 70%;
+    height: 70%;
+  }
+
+  100% {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+.wall-element{
+  width: 50%;
+  height: 50%;
+  background-color: maroon;
 }

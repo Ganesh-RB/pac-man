@@ -1,5 +1,5 @@
 var gameBoard = document.getElementById("gameBoard");
-const SPEED = 4; // 4 unit per sec
+const SPEED = 1; // 5 unit per sec
 
 gameInit(gameBoard);
 
@@ -12,14 +12,14 @@ const gameLoop = setInterval(main, 1000 / SPEED);
 
 const update = () => {
   updatePacman();
+  updateLayout(gameBoard);
 }
 
 const draw = () => {
-  gameBoard.innerHTML = "";
   drawPacman(gameBoard);
 }
 
 const fullscreenTogglerButton = document.getElementById("fullscreenToggler");
-fullscreenTogglerButton.addEventListener("click", toggleFullscreen);  
+fullscreenTogglerButton.addEventListener("click", toggleFullscreen);
 
 const scoreBoard = document.getElementById("scoreBoard");

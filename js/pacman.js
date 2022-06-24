@@ -1,7 +1,11 @@
 var direction = LEFT;
 var position = { x: 10, y: 11 };
 
-const positionOverflowHandler = () => {
+const getPacmanPosition = () => {
+  return position;
+}
+
+const positionOverflowHandler = (position) => {
   if (position.x > getGridColumns()) {
     position.x = 0;
   }
@@ -20,13 +24,19 @@ const positionOverflowHandler = () => {
 
 const updatePacman = () => {
   var inputDirection = getInputDirection();
-  position.x += inputDirection.x;
-  position.y += inputDirection.y;
+  let newPosition = position;
+  newPosition.x += inputDirection.x;
+  newPosition.y += inputDirection.y;
 
-  positionOverflowHandler();
+  positionOverflowHandler(newPosition);
+  if (checkWallCollision(newPosition) === false) { 
+    position = newPosition;
+    
+  }
+
 }
 
-const drawPacman = (gameBoard) => {
+const getNewPacman = () => {
   const pacman = document.createElement("img");
   pacman.src = "image/Pacman.svg";
   pacman.id = "pacman";
@@ -34,5 +44,15 @@ const drawPacman = (gameBoard) => {
   pacman.style.transform = direction.transform;
   pacman.style.gridRowStart = position.y;
   pacman.style.gridColumnStart = position.x;
-  gameBoard.appendChild(pacman);
+  return pacman;
+}
+
+const drawPacman = (gameBoard) => {
+  const oldPacman = document.getElementById("pacman");
+  const newPacman = getNewPacman();
+  if (oldPacman) {
+    gameBoard.replaceChild(newPacman, oldPacman);
+  } else {
+    gameBoard.appendChild(newPacman);
+  }
 }
