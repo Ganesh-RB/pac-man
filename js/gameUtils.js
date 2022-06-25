@@ -1,12 +1,22 @@
 /*************** Game setup ***************/
-const gridColumns = 60;
-const gridRows = 20;
-
+const gridColumns = 28;
+const gridRows = 28;
 
 const gameInit = (gameBoard) => {
   gameBoard.style.gridTemplateColumns = `repeat(${gridColumns},1fr)`;
   gameBoard.style.gridTemplateRows = `repeat(${gridRows},1fr)`;
   gameBoard.style.aspectRatio = `${gridColumns / gridRows}`;
+
+  const screenWidth = window.screen.availWidth;
+  const screenHeight = window.screen.availHeight;
+  const aspectRatio = gridColumns / gridRows;
+  if (screenWidth > screenHeight * aspectRatio) {
+    gameBoard.style.height = `${screenHeight * 0.8}px`;
+  } else {
+    gameBoard.style.width = `${screenWidth * 0.8}px`;
+  }
+
+  layoutInit(gameBoard);
 }
 
 const getGridRows = () => {

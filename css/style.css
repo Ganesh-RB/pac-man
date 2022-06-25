@@ -1,6 +1,6 @@
 :root {
   --width: 80vw;
-  --height: 75vh;
+  --height: 80vh;
 }
 
 html {
@@ -28,14 +28,19 @@ body {
 }
 
 #gameBoard {
+  cursor: none;
+  caret-color: transparent;
   max-width: var(--width);
   background-color: black;
   max-height: var(--height);
   display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 #pacman {
   width: 100%;
+  height: 100%;
 }
 
 #fullscreenToggler {
@@ -50,14 +55,95 @@ body {
   bottom: 0px;
 }
 
-button{
+button {
   border-width: 0.2vmin;
   padding: 0.2vmin 0.6vmin;
 }
 
-#scoreBoard{
+#scoreBoard {
   position: absolute;
   top: 5px;
   left: 30px;
   line-height: 20px;
+}
+
+.food-element {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.power-pellet {
+  animation: grow-power-pellet infinite 2s alternate;
+}
+
+@keyframes grow-power-pellet {
+  50% {
+    width: 70%;
+    height: 70%;
+  }
+
+  100% {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+.wall-element {
+  width: 60%;
+  height: 60%;
+  background-color: #0c7703b3;
+  border: 2px ridge #429404bf;
+
+}
+
+.animated-pacman-body {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f2d648;
+  position: relative;
+}
+
+.animated-pacman-eye {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  top: 20%;
+  right: 40%;
+  background: #333333;
+}
+
+.animated-pacman-mouth {
+  position: absolute;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  animation: eat 0.5s infinite alternate;
+  animation-duration: 2s;
+}
+
+@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+
+  75% {
+    clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+
+  100% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
 }
