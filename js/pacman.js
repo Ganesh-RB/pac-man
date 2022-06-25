@@ -52,9 +52,26 @@ const getNewPacman = () => {
   return pacman;
 }
 
+const getNewAnimatedPacman = () => {
+  const pacman = document.createElement("div");
+  pacman.id = "pacman";
+  pacman.className = "animated-pacman-body";
+  pacman.innerHTML =
+    `<div class="animated-pacman-eye"></div>
+    <div class="animated-pacman-mouth" style="animation-duration: ${2 / SPEED}s;"></div>`;
+
+  direction = getInputDirection();
+  pacman.style.transform = direction.transform;
+  pacman.style.gridRowStart = position.y;
+  pacman.style.gridColumnStart = position.x;
+
+  return pacman;
+}
+
+
 const drawPacman = (gameBoard) => {
   const oldPacman = document.getElementById("pacman");
-  const newPacman = getNewPacman();
+  const newPacman = getNewAnimatedPacman();
   if (oldPacman) {
     gameBoard.replaceChild(newPacman, oldPacman);
   } else {

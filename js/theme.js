@@ -33,7 +33,6 @@ const changeLayoutTheme = () => {
   const wallElements = document.querySelectorAll(".wall-element");
 
   nextTheme = getNextTheme();
-  console.log(currentTheme);
   wallElements.forEach(wall => {
     wall.style.backgroundColor = nextTheme.bgColor;
     wall.style.borderColor = nextTheme.brColor;
@@ -46,6 +45,4 @@ const themeInit = () => {
     wall.style.backgroundColor = currentTheme.bgColor;
     wall.style.borderColor = currentTheme.brColor;
   })
-
-
 }

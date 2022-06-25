@@ -22,4 +22,3 @@ const draw = () => {
 }
 
 fullscreenTogglerButton.addEventListener("click", toggleFullscreen);
-

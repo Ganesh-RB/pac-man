@@ -1,6 +1,6 @@
 :root {
   --width: 80vw;
-  --height: 75vh;
+  --height: 80vh;
 }
 
 html {
@@ -96,4 +96,54 @@ button {
   background-color: #0c7703b3;
   border: 2px ridge #429404bf;
 
-} 
+}
+
+.animated-pacman-body {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f2d648;
+  position: relative;
+}
+
+.animated-pacman-eye {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  top: 20%;
+  right: 40%;
+  background: #333333;
+}
+
+.animated-pacman-mouth {
+  position: absolute;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  animation: eat 0.5s infinite alternate;
+  animation-duration: 2s;
+}
+
+@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+
+  75% {
+    clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+
+  100% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+}
