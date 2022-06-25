@@ -15,11 +15,9 @@ const updateFood = (gameBoard) => {
   const pacmanPosition = getPacmanPosition();
   let row = pacmanPosition.y;
   let column = pacmanPosition.x;
-  // console.log(pacmanPosition); 
   const foodElement = getFoodElement(row, column);
 
   if (foodElement) {
-    console.log(foodElement);
     makeEmpty(row, column);
     gameBoard.removeChild(foodElement);
   }

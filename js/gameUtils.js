@@ -2,7 +2,6 @@
 const gridColumns = 28;
 const gridRows = 28;
 
-
 const gameInit = (gameBoard) => {
   gameBoard.style.gridTemplateColumns = `repeat(${gridColumns},1fr)`;
   gameBoard.style.gridTemplateRows = `repeat(${gridRows},1fr)`;

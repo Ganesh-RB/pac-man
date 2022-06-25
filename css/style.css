@@ -28,6 +28,8 @@ body {
 }
 
 #gameBoard {
+  cursor: none;
+  caret-color: transparent;
   max-width: var(--width);
   background-color: black;
   max-height: var(--height);
@@ -38,6 +40,7 @@ body {
 
 #pacman {
   width: 100%;
+  height: 100%;
 }
 
 #fullscreenToggler {
@@ -87,8 +90,10 @@ button {
   }
 }
 
-.wall-element{
-  width: 50%;
-  height: 50%;
-  background-color: maroon;
-}
+.wall-element {
+  width: 60%;
+  height: 60%;
+  background-color: #0c7703b3;
+  border: 2px ridge #429404bf;
+
+} 

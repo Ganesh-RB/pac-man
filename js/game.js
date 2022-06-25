@@ -1,5 +1,7 @@
-var gameBoard = document.getElementById("gameBoard");
-const SPEED = 1; // 5 unit per sec
+const gameBoard = document.getElementById("gameBoard");
+const scoreBoard = document.getElementById("scoreBoard");
+const fullscreenTogglerButton = document.getElementById("fullscreenToggler");
+const SPEED = 4; // 4 unit per sec
 
 gameInit(gameBoard);
 
@@ -19,7 +21,5 @@ const draw = () => {
   drawPacman(gameBoard);
 }
 
-const fullscreenTogglerButton = document.getElementById("fullscreenToggler");
 fullscreenTogglerButton.addEventListener("click", toggleFullscreen);
 
-const scoreBoard = document.getElementById("scoreBoard");

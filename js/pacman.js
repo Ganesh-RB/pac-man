@@ -1,39 +1,44 @@
 var direction = LEFT;
-var position = { x: 10, y: 11 };
+var position = { x: 14, y: 18 };
 
 const getPacmanPosition = () => {
-  return position;
+  const returnValue = { x: 0, y: 0 };
+  returnValue.x = position.x;
+  returnValue.y = position.y;
+
+  return returnValue;
 }
 
 const positionOverflowHandler = (position) => {
   if (position.x > getGridColumns()) {
-    position.x = 0;
+    position.x = 1;
   }
-  else if (position.x < 0) {
+  else if (position.x < 1) {
     position.x = getGridColumns();
   }
 
   if (position.y > getGridRows()) {
-    position.y = 0;
+    position.y = 1;
   }
-  else if (position.y < 0) {
+  else if (position.y < 1) {
     position.y = getGridRows();
   }
 }
 
 
 const updatePacman = () => {
-  var inputDirection = getInputDirection();
-  let newPosition = position;
-  newPosition.x += inputDirection.x;
-  newPosition.y += inputDirection.y;
+  const inputDirection = getInputDirection();
+
+  var newPosition = { x: 0, y: 0 };
+  newPosition.x += position.x + inputDirection.x;
+  newPosition.y += position.y + inputDirection.y;
 
   positionOverflowHandler(newPosition);
-  if (checkWallCollision(newPosition) === false) { 
-    position = newPosition;
-    
-  }
 
+  if (checkWallCollision(newPosition) === false) {
+    position.x = newPosition.x;
+    position.y = newPosition.y;
+  }
 }
 
 const getNewPacman = () => {

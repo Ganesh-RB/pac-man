@@ -36,26 +36,6 @@ var powerPellet = 4;  // 4 - power-pellet
 // 5 - pacman-position
 
 
-const getNewPowerPellet = (rowNo, columnNo) => {
-  const powerPellet = getNewFoodElement(rowNo, columnNo);
-  powerPellet.classList.add("power-pellet");
-  return powerPellet;
-}
-
-const getNewWall = (rowNo, columnNo) => {
-  const wallElement = document.createElement("div");
-  wallElement.className = "wall-element";
-  wallElement.style.gridRowStart = rowNo || 0;
-  wallElement.style.gridColumnStart = columnNo || 0;
-  return wallElement;
-
-}
-
-const updateLayout = (gameBoard) => {
-  updateFood(gameBoard);
-  // updateGhost();
-}
-
 const makeEmpty = (rowNO, columnNo) => {
   const index = getIndex(rowNO, columnNo);
   layout[index] = empty;
@@ -70,6 +50,16 @@ const getIndex = (rowNo, columnNo) => {
   return (rowNo - 1) * getGridRows() + columnNo - 1;
 }
 
+const layoutInit = (gameBoard) => {
+  drawLayout(gameBoard);
+  themeInit();
+}
+
+const updateLayout = (gameBoard) => {
+  updateFood(gameBoard);
+  updatePowerPellet(gameBoard);
+  // updateGhost();
+}
 
 const drawLayout = (gameBoard) => {
   for (let r = 0; r < getGridRows(); r++) {
@@ -91,22 +81,5 @@ const drawLayout = (gameBoard) => {
 
       }
     }
-  }
-}
-
-
-const layoutInit = (gameBoard) => {
-  drawLayout(gameBoard);
-}
-
-const checkWallCollision = (newPosition) => {
-  let rowNo = newPosition.y;
-  let columnNo = newPosition.x;
-
-  if (getLayoutElementType(rowNo, columnNo) === wall) {
-    console.log(newPosition);
-    return true;
-  } else {
-    return false;
   }
 }
