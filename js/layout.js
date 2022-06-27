@@ -55,9 +55,9 @@ const layoutInit = (gameBoard) => {
   themeInit();
 }
 
-const updateLayout = (gameBoard) => {
-  updateFood(gameBoard);
-  updatePowerPellet(gameBoard);
+const updateLayout = () => {
+  updateFood();
+  updatePowerPellet();
   // updateGhost();
 }
 

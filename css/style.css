@@ -1,6 +1,6 @@
 :root {
-  --width: 80vw;
-  --height: 80vh;
+  --width: 70vw;
+  --height: 70vh;
 }
 
 html {
@@ -11,7 +11,8 @@ html {
 
 body {
   overscroll-behavior: contain;
-  background-color: grey;
+  caret-color: transparent;
+  background-color: #808080;
   margin: 0;
   width: 100%;
   height: 100%;
@@ -21,16 +22,15 @@ body {
 }
 
 #canvas {
-  background-color: #303030b3;
-  padding: 3vmin 3vmin;
+  background-color: #403030b3;
   position: relative;
   border-radius: 5px;
 }
 
 #gameBoard {
   cursor: none;
-  caret-color: transparent;
   max-width: var(--width);
+  margin: 3vmin 3vmin;
   background-color: black;
   max-height: var(--height);
   display: grid;
@@ -62,9 +62,10 @@ button {
 
 #scoreBoard {
   position: absolute;
-  top: 5px;
-  left: 30px;
-  line-height: 20px;
+  top: 1vmin;
+  left: 3vmin;
+  line-height: 1vmin;
+  font-size: 2.5vmin;
 }
 
 .food-element {
@@ -75,7 +76,9 @@ button {
 }
 
 .power-pellet {
-  animation: grow-power-pellet infinite 2s alternate;
+  width: 0%;
+  height: 0%;
+  animation: grow-power-pellet infinite 1s alternate;
 }
 
 @keyframes grow-power-pellet {
@@ -146,4 +149,51 @@ button {
   100% {
     clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
   }
+}
+
+.pause-state {
+  opacity: 0.6;
+}
+
+.pause-screen {
+  position: absolute;
+  top: 40%;
+  text-align: center;
+  font-size: 12vmin;
+  color: whitesmoke;
+  opacity: 1;
+}
+
+#pacman-logo {
+  background: url("../image/Pacman-logo.svg") no-repeat;
+  background-size: contain;
+  width: 60vw;
+  height: 20vw;
+
+  position: absolute;
+  top: 10%;
+}
+
+#play-button {
+  width: 20vw;
+  height: 10vw;
+  border-radius: 5vw;
+  font-size: 4vw;
+  font-weight: bold;
+  background-color: #ff9500;
+  color: white;
+  border: 1.6vw ridge rgb(167, 83, 5);
+  box-shadow: 0 1.6vw #604040;
+  position: absolute;
+  top: 70%;
+}
+
+#play-button:hover{
+  background-color: #ee8700;
+}
+
+#play-button:active{
+  background-color: #ff7000;
+  box-shadow: 0 0.6vw #302020;
+  transform: translateY(1vw);
 }

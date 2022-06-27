@@ -17,7 +17,10 @@ const updatePowerPellet = () => {
 
   if (powerPellet) {
     makeEmpty(row, column);
+    var gameBoard = getGameBoard();
     gameBoard.removeChild(powerPellet);
-    changeLayoutTheme();  
+    changeLayoutTheme();
+    updateScore(50);
+    playPowerSound();
   }
 }

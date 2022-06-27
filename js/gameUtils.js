@@ -2,21 +2,27 @@
 const gridColumns = 28;
 const gridRows = 28;
 
-const gameInit = (gameBoard) => {
-  gameBoard.style.gridTemplateColumns = `repeat(${gridColumns},1fr)`;
-  gameBoard.style.gridTemplateRows = `repeat(${gridRows},1fr)`;
-  gameBoard.style.aspectRatio = `${gridColumns / gridRows}`;
+const screenSizeInit = () => {
+  screenWidth = window.screen.availWidth;
+  screenHeight = window.screen.availHeight;
+}
 
-  const screenWidth = window.screen.availWidth;
-  const screenHeight = window.screen.availHeight;
-  const aspectRatio = gridColumns / gridRows;
-  if (screenWidth > screenHeight * aspectRatio) {
-    gameBoard.style.height = `${screenHeight * 0.8}px`;
-  } else {
-    gameBoard.style.width = `${screenWidth * 0.8}px`;
-  }
+const canvasInit = (canvas) => {
+  canvas.innerHTML =
+    `<div id="scoreBoard"></div>
+     <div id="gameBoard"></div>
+     <button id="fullscreenToggler"> </button>`;
+}
 
+const gameInit = () => {
+  gameBoard = document.getElementById("gameBoard");
+  scoreBoard = document.getElementById("scoreBoard");
+  fullscreenTogglerButton = document.getElementById("fullscreenToggler");
+
+  gameBoardInit(gameBoard);
+  fullscreenTogglerInit(fullscreenTogglerButton);
   layoutInit(gameBoard);
+  soundInit(gameBoard);
 }
 
 const getGridRows = () => {
@@ -27,6 +33,32 @@ const getGridColumns = () => {
   return gridColumns;
 }
 
+const gameBoardInit = (gameBoard) => {
+  gameBoard.innerHTML = "";
+  gameBoard.style.gridTemplateColumns = `repeat(${gridColumns},1fr)`;
+  gameBoard.style.gridTemplateRows = `repeat(${gridRows},1fr)`;
+  gameBoard.style.aspectRatio = `${gridColumns / gridRows}`;
+
+  const aspectRatio = gridColumns / gridRows;
+  if (screenWidth > screenHeight * aspectRatio) {
+    gameBoard.style.height = `${screenHeight * 0.8}px`;
+    console.log(gameBoard.style.height);
+  } else {
+    gameBoard.style.width = `${screenWidth * 0.8}px`;
+    console.log(gameBoard.style.width);
+  }
+}
+
+const playGame = () => {
+  updateStartScreen(bodyElement);
+  canvasInit(canvas);
+  gameInit();
+  draw();
+  playBeginningSound();
+  const waitforPlayGameSound = setTimeout(() => {
+    gameLoop = setInterval(main, 1000 / SPEED);
+  }, 4000)
+}
 
 /************ Full screen Toggler ***********/
 const isFullscreen = () => {
@@ -42,6 +74,10 @@ const toggleFullscreen = (e) => {
     document.documentElement.requestFullscreen();
     fullscreenTogglerButton.style.backgroundImage = "url(image/fullscreen-exit.svg)"
   }
+}
+
+const fullscreenTogglerInit = (fullscreenTogglerButton) => {
+  fullscreenTogglerButton.addEventListener("click", toggleFullscreen);
 }
 
 
@@ -66,8 +102,16 @@ const DOWN = {
 /****************** Score Board ******************/
 var score = 0;
 
-const updateScore = () => {
-  score++;
+const updateScore = (number) => {
+  if (number) {
+    score += number;
+  } else {
+    score += 10;
+  }
+}
+
+const drawScoreBoard = (scoreBoard) => {
+  scoreBoard.textContent = getScore();
 }
 
 const resetScore = () => {
@@ -77,3 +121,67 @@ const resetScore = () => {
 const getScore = () => {
   return score;
 }
+
+/************** Pause Screen ************/
+var pause = false;
+
+const isPause = () => {
+  return pause;
+}
+
+const togglePauseState = () => {
+  pause = !pause;
+}
+
+const drawPauseScreen = (gameBoard) => {
+  const initialPauseScreen = document.querySelector(".pause-screen");
+  if (initialPauseScreen) {
+    gameBoard.removeChild(initialPauseScreen);
+
+  } else {
+    const pauseScreen = document.createElement("div");
+    pauseScreen.className = "pause-screen";
+    pauseScreen.textContent = "PAUSE";
+    gameBoard.appendChild(pauseScreen);
+  }
+
+  gameBoard.classList.toggle("pause-state");
+}
+
+
+/*************** Start Screen ***************/
+const drawStartScreen = (bodyElement) => {
+  const demoMovement = document.createElement("div");
+  demoMovement.id = "demo-movement";
+  // bodyElement.appendChild(demoMovement);
+
+  const playButton = document.getElementById("play-button");
+  playButton.addEventListener("click", (ev) => {
+    clearTimeout(startGame);
+    setTimeout(playGame, 100);
+  })
+}
+
+
+const shrinkPacmanLogo = () => {
+  const pacmanLogo = document.getElementById("pacman-logo");
+  if (screenHeight > 767) {
+    pacmanLogo.style.width = "30vh";
+    pacmanLogo.style.height = "10vh";
+  } else {
+    pacmanLogo.style.width = "0px";
+    pacmanLogo.style.height = "0px";
+  }
+  pacmanLogo.style.top = "2%";
+}
+
+const removePlayButton = (bodyElement) => {
+  const playButton = document.getElementById("play-button");
+  bodyElement.removeChild(playButton);
+}
+
+const updateStartScreen = (bodyElement) => {
+  shrinkPacmanLogo();
+  removePlayButton(bodyElement);
+}
+

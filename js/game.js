@@ -1,24 +1,33 @@
-const gameBoard = document.getElementById("gameBoard");
-const scoreBoard = document.getElementById("scoreBoard");
-const fullscreenTogglerButton = document.getElementById("fullscreenToggler");
+const bodyElement = document.querySelector("body");
+const canvas = document.getElementById("canvas");
 const SPEED = 4; // 4 unit per sec
+var gameBoard, scoreBoard, fullscreenTogglerButton, gameLoop, screenHeight, screenWidth;
 
-gameInit(gameBoard);
+screenSizeInit();
+drawStartScreen(bodyElement);
+
+const startGame = setTimeout(() => {
+  playGame();
+}, 60000);
+
 
 const main = () => {
-  update();
-  draw();
+  if (isPause() === false) {
+    update();
+    draw();
+  }
 }
-
-const gameLoop = setInterval(main, 1000 / SPEED);
 
 const update = () => {
   updatePacman();
-  updateLayout(gameBoard);
+  updateLayout();
 }
 
 const draw = () => {
+  drawScoreBoard(scoreBoard);
   drawPacman(gameBoard);
 }
 
-fullscreenTogglerButton.addEventListener("click", toggleFullscreen);
+const getGameBoard = () => {
+  return gameBoard;
+}

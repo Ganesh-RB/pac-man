@@ -11,7 +11,7 @@ const getFoodElement = (rowNo, columnNo) => {
   return document.getElementById(`food-element-${rowNo}-${columnNo}`);
 }
 
-const updateFood = (gameBoard) => {
+const updateFood = () => {
   const pacmanPosition = getPacmanPosition();
   let row = pacmanPosition.y;
   let column = pacmanPosition.x;
@@ -19,6 +19,9 @@ const updateFood = (gameBoard) => {
 
   if (foodElement) {
     makeEmpty(row, column);
+    var gameBoard = getGameBoard();
     gameBoard.removeChild(foodElement);
+    updateScore();
+    playChompSound();
   }
 }

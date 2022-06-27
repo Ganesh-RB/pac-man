@@ -15,7 +15,10 @@ const updateInputDirection = (event) => {
   }
 }
 
-window.addEventListener("keydown", updateInputDirection);
+window.addEventListener("keydown", event => {
+  updateInputDirection(event);
+  updatePauseState(event);
+});
 
 document.addEventListener("swipe-left", e => {
   inputDirection = LEFT;
@@ -36,4 +39,11 @@ document.addEventListener("swipe-up", e => {
 
 const getInputDirection = () => {
   return inputDirection;
+}
+
+const updatePauseState = (event) => {
+  if (event.key === "p") {
+    togglePauseState();
+    drawPauseScreen(gameBoard);
+  }
 }
