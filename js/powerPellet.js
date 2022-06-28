@@ -20,7 +20,7 @@ const updatePowerPellet = () => {
     var gameBoard = getGameBoard();
     gameBoard.removeChild(powerPellet);
     changeLayoutTheme();
-    updateScore(50);
+    updateScore(100);
     playPowerSound();
   }
 }

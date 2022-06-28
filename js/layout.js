@@ -53,11 +53,14 @@ const getIndex = (rowNo, columnNo) => {
 const layoutInit = (gameBoard) => {
   drawLayout(gameBoard);
   themeInit();
+  drawPacman(gameBoard);
+  // drawGhosts(gameBoard);
 }
 
 const updateLayout = () => {
   updateFood();
   updatePowerPellet();
+  updatePacman();
   // updateGhost();
 }
 

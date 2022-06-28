@@ -39,20 +39,18 @@ const updatePacman = () => {
     position.x = newPosition.x;
     position.y = newPosition.y;
   }
+  
+  const pacman = document.getElementById("pacman");
+  if (pacman) {
+    pacman.style.transform = inputDirection.transform;
+    pacman.style.gridColumnStart = position.x
+    pacman.style.gridRowStart = position.y;
+  } else {
+    console.log("pacman does not exist")
+  }
 }
 
-const getNewPacman = () => {
-  const pacman = document.createElement("img");
-  pacman.src = "image/Pacman.svg";
-  pacman.id = "pacman";
-  direction = getInputDirection();
-  pacman.style.transform = direction.transform;
-  pacman.style.gridRowStart = position.y;
-  pacman.style.gridColumnStart = position.x;
-  return pacman;
-}
-
-const getNewAnimatedPacman = () => {
+const drawPacman = (gameBoard) => {
   const pacman = document.createElement("div");
   pacman.id = "pacman";
   pacman.className = "animated-pacman-body";
@@ -65,16 +63,5 @@ const getNewAnimatedPacman = () => {
   pacman.style.gridRowStart = position.y;
   pacman.style.gridColumnStart = position.x;
 
-  return pacman;
-}
-
-
-const drawPacman = (gameBoard) => {
-  const oldPacman = document.getElementById("pacman");
-  const newPacman = getNewAnimatedPacman();
-  if (oldPacman) {
-    gameBoard.replaceChild(newPacman, oldPacman);
-  } else {
-    gameBoard.appendChild(newPacman);
-  }
+  gameBoard.appendChild(pacman);
 }

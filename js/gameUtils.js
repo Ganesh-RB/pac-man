@@ -19,6 +19,7 @@ const gameInit = () => {
   scoreBoard = document.getElementById("scoreBoard");
   fullscreenTogglerButton = document.getElementById("fullscreenToggler");
 
+  scoreBoardInit(scoreBoard);
   gameBoardInit(gameBoard);
   fullscreenTogglerInit(fullscreenTogglerButton);
   layoutInit(gameBoard);
@@ -53,9 +54,8 @@ const playGame = () => {
   updateStartScreen(bodyElement);
   canvasInit(canvas);
   gameInit();
-  draw();
   playBeginningSound();
-  const waitforPlayGameSound = setTimeout(() => {
+  const waitForPlayingGameSound = setTimeout(() => {
     gameLoop = setInterval(main, 1000 / SPEED);
   }, 4000)
 }
@@ -110,7 +110,12 @@ const updateScore = (number) => {
   }
 }
 
-const drawScoreBoard = (scoreBoard) => {
+const scoreBoardInit = (scoreBoard) => {
+  scoreBoard.textContent = getScore();
+}
+
+
+const updateScoreBoard = (scoreBoard) => {
   scoreBoard.textContent = getScore();
 }
 
@@ -151,8 +156,8 @@ const drawPauseScreen = (gameBoard) => {
 
 /*************** Start Screen ***************/
 const drawStartScreen = (bodyElement) => {
-  const demoMovement = document.createElement("div");
-  demoMovement.id = "demo-movement";
+  // const demoMovement = document.createElement("div");
+  // demoMovement.id = "demo-movement";
   // bodyElement.appendChild(demoMovement);
 
   const playButton = document.getElementById("play-button");
@@ -184,4 +189,3 @@ const updateStartScreen = (bodyElement) => {
   shrinkPacmanLogo();
   removePlayButton(bodyElement);
 }
-

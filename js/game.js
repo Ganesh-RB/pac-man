@@ -10,22 +10,15 @@ const startGame = setTimeout(() => {
   playGame();
 }, 60000);
 
-
 const main = () => {
   if (isPause() === false) {
     update();
-    draw();
   }
 }
 
 const update = () => {
-  updatePacman();
   updateLayout();
-}
-
-const draw = () => {
-  drawScoreBoard(scoreBoard);
-  drawPacman(gameBoard);
+  updateScoreBoard(scoreBoard);
 }
 
 const getGameBoard = () => {
