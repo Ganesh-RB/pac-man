@@ -43,10 +43,8 @@ const gameBoardInit = (gameBoard) => {
   const aspectRatio = gridColumns / gridRows;
   if (screenWidth > screenHeight * aspectRatio) {
     gameBoard.style.height = `${screenHeight * 0.8}px`;
-    console.log(gameBoard.style.height);
   } else {
     gameBoard.style.width = `${screenWidth * 0.8}px`;
-    console.log(gameBoard.style.width);
   }
 }
 
@@ -98,7 +96,11 @@ const DOWN = {
   x: 0, y: 1, transform: "scale(-1,1) rotate(90deg)"
 };
 
+const NODIR = {
+  x: 0, y: 0, transform: ""
+}
 
+const DIRECTION = [LEFT, RIGHT, UP, DOWN];
 /****************** Score Board ******************/
 var score = 0;
 
@@ -188,4 +190,20 @@ const removePlayButton = (bodyElement) => {
 const updateStartScreen = (bodyElement) => {
   shrinkPacmanLogo();
   removePlayButton(bodyElement);
+}
+
+
+/************** Comparing function ****************/
+const isEqualPosition = (p1, p2) => {
+  return (p1.x === p2.x) && (p1.y === p2.y);
+}
+
+/*************** Game End ***********************/
+const checkGameEnd = () => {
+  let pacmanPosition = getPacmanPosition();
+  if (isGhost(pacmanPosition)) {
+    return true;
+  }
+
+  return false;
 }

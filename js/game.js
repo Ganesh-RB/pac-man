@@ -13,6 +13,10 @@ const startGame = setTimeout(() => {
 const main = () => {
   if (isPause() === false) {
     update();
+    if (checkGameEnd()) {
+      clearInterval(gameLoop);
+      window.alert("Game Over");
+    }
   }
 }
 

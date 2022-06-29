@@ -12,7 +12,7 @@ const checkWallCollision = (newPosition) => {
   let rowNo = newPosition.y;
   let columnNo = newPosition.x;
 
-  if (getLayoutElementType(rowNo, columnNo) === wall) {
+  if (getLayoutElementType(rowNo, columnNo) === TYPE.wall) {
     return true;
   } else {
     return false;

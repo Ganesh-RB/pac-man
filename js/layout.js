@@ -10,10 +10,10 @@ var layout = [
   2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
   2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2,
   2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 3, 3, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 3, 3, 3, 3, 3, 3, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
-  0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 2, 3, 3, 3, 3, 3, 3, 2, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
-  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 3, 3, 3, 3, 3, 3, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
+  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
+  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 3, 0, 0, 0, 0, 3, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
+  0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+  2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 3, 0, 0, 0, 0, 3, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
   2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
   2, 2, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 2,
   2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2,
@@ -28,40 +28,79 @@ var layout = [
   2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
 ]
-var empty = 0;        // 0 - empty
-var food = 1;         // 1 - pac-dots
-var wall = 2;         // 2 - wall
-var ghost = 3;        // 3 - ghost-lair
-var powerPellet = 4;  // 4 - power-pellet
-// 5 - pacman-position
 
-
-const makeEmpty = (rowNO, columnNo) => {
-  const index = getIndex(rowNO, columnNo);
-  layout[index] = empty;
+const TYPE = {
+  empty: 0,
+  food: 1,
+  wall: 2,
+  ghost: 3,
+  powerPellet: 4,
+  pacman: 5
 }
 
-const getLayoutElementType = (rowNo, columnNo) => {
-  let index = getIndex(rowNo, columnNo);
+const changeTypeTo = (newType, rowNo_Position, columnNo) => {
+  const index = getIndex(rowNo_Position, columnNo);
+  layout[index] = newType;
+}
+
+const makeEmpty = (rowNo_Position, columnNo) => {
+  const index = getIndex(rowNo_Position, columnNo);
+  layout[index] = TYPE.empty;
+}
+
+const isWall = (rowNo_Position, columnNo) => {
+  return getLayoutElementType(rowNo_Position, columnNo) === TYPE.wall;
+}
+
+const isGhost = (rowNo_Position, columnNo) => {
+  return getLayoutElementType(rowNo_Position, columnNo) === TYPE.ghost;
+}
+
+const isPenetrable = (rowNo_Position, columnNo) => {
+  return !isWall(rowNo_Position, columnNo) && !isGhost(rowNo_Position, columnNo);
+}
+
+const getRandomPositionWithTYpe = (compare) => {
+  var position;
+  do {
+    position = getRandomGridPosition();
+  } while (!compare(position));
+
+  return position;
+}
+
+const getRandomGridPosition = () => {
+  var position = { x: 0, y: 0 };
+  position.x = Math.floor(Math.random() * getGridColumns()) + 1;
+  position.y = Math.floor(Math.random() * getGridRows()) + 1;
+
+  return position;
+}
+
+const getLayoutElementType = (rowNo_Position, columnNo) => {
+  let index = getIndex(rowNo_Position, columnNo);
   return layout[index];
 }
 
-const getIndex = (rowNo, columnNo) => {
-  return (rowNo - 1) * getGridRows() + columnNo - 1;
+const getIndex = (rowNo_Position, columnNo) => {
+  if (columnNo) {
+    return (rowNo_Position - 1) * getGridRows() + columnNo - 1;
+  }
+
+  return (rowNo_Position.y - 1) * getGridRows() + rowNo_Position.x - 1;
 }
 
 const layoutInit = (gameBoard) => {
   drawLayout(gameBoard);
   themeInit();
   drawPacman(gameBoard);
-  // drawGhosts(gameBoard);
 }
 
 const updateLayout = () => {
   updateFood();
   updatePowerPellet();
   updatePacman();
-  // updateGhost();
+  updateGhosts();
 }
 
 const drawLayout = (gameBoard) => {
@@ -70,18 +109,21 @@ const drawLayout = (gameBoard) => {
 
       let index = r * getGridRows() + c;
 
-      if (layout[index] === food) {
+      if (layout[index] === TYPE.food) {
         let newFoodElement = getNewFoodElement(r + 1, c + 1);
         gameBoard.appendChild(newFoodElement);
 
-      } else if (layout[index] === wall) {
+      } else if (layout[index] === TYPE.wall) {
         let newWallElement = getNewWall(r + 1, c + 1);
         gameBoard.appendChild(newWallElement);
 
-      } else if (layout[index] === powerPellet) {
+      } else if (layout[index] === TYPE.powerPellet) {
         let newPowerPellet = getNewPowerPellet(r + 1, c + 1);
         gameBoard.appendChild(newPowerPellet);
 
+      } else if (layout[index] === TYPE.ghost) {
+        let newGhostElement = getNewGhostElement(r + 1, c + 1);
+        gameBoard.appendChild(newGhostElement);
       }
     }
   }

@@ -1,5 +1,7 @@
 var direction = LEFT;
 var position = { x: 14, y: 18 };
+var pacmanLocationHistory = [];
+var size = 20;
 
 const getPacmanPosition = () => {
   const returnValue = { x: 0, y: 0 };
@@ -29,6 +31,7 @@ const positionOverflowHandler = (position) => {
 const updatePacman = () => {
   const inputDirection = getInputDirection();
 
+  makeEmpty(position);
   var newPosition = { x: 0, y: 0 };
   newPosition.x += position.x + inputDirection.x;
   newPosition.y += position.y + inputDirection.y;
@@ -39,7 +42,7 @@ const updatePacman = () => {
     position.x = newPosition.x;
     position.y = newPosition.y;
   }
-  
+
   const pacman = document.getElementById("pacman");
   if (pacman) {
     pacman.style.transform = inputDirection.transform;
@@ -48,6 +51,9 @@ const updatePacman = () => {
   } else {
     console.log("pacman does not exist")
   }
+
+  changeTypeTo(TYPE.pacman, position);
+  updateLocationHistory();
 }
 
 const drawPacman = (gameBoard) => {
@@ -64,4 +70,25 @@ const drawPacman = (gameBoard) => {
   pacman.style.gridColumnStart = position.x;
 
   gameBoard.appendChild(pacman);
+
+  locationHistoryInit();
+}
+
+const locationHistoryInit = () => {
+  for (let index = 0; index < size; index++) {
+    pacmanLocationHistory.push(getPacmanPosition()  );
+  }
+}
+
+const getLeakedLastLocation = () => {
+  return pacmanLocationHistory.shift();
+}
+
+const getRandomLocationHistory = () => {
+  let index = Math.floor(Math.random() * size);
+  return pacmanLocationHistory[index];
+}
+
+const updateLocationHistory = () => {
+  pacmanLocationHistory.push(getPacmanPosition());
 }
